@@ -17,6 +17,5 @@ RUN apt update && apt install nano
 
 ADD keras.json /root/.keras/keras.json
 
-RUN conda install opencv-python
 RUN apt update && apt install -y libsm6 libxext6 libglib2.0-0
 
