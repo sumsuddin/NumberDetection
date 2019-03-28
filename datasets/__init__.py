@@ -6,9 +6,9 @@ import numpy as np
 ## Utilities to save or load processed data
 
 def get_outfile_name(a):
-    if not os.path.exists("/sharedfiles/datasets"):
-        os.makedirs("/sharedfiles/datasets")
-    outfile = "/sharedfiles/datasets/" + a.get("name")
+    if not os.path.exists(".sharedfiles/datasets"):
+        os.makedirs(".sharedfiles/datasets")
+    outfile = ".sharedfiles/datasets/" + a.get("name")
 
     noise = a.get("noise")
     if noise:

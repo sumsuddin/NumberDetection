@@ -15,6 +15,8 @@ def check_config(write_json=False):
         sys.exit("Backend not supported.")
     else:
         env_name = conda_env[backend] + "-py" + str(sys.version_info.major) + str(sys.version_info.minor)
+        
+    return
 
     if r is None or (sys.version_info.major != int(r.group(2)) or sys.version_info.minor != int(r.group(3))):
     	sys.exit("""
