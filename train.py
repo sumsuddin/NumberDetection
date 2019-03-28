@@ -164,6 +164,11 @@ if args.resume_model:
 	built_model.load_weights(args.resume_model, by_name=True)
 # plot_model(built_model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
 
+#import numpy as np
+#import cv2
+#test_img = cv2.imread("test/test.png", 0)
+#result = built_model.predict(np.expand_dims(test_img, axis=0))
+
 # parallel computing on CNTK
 if args.parallel and (K._BACKEND=='cntk'):
 	import cntk as C
@@ -197,7 +202,7 @@ if args.save:
 	from keras.callbacks import ModelCheckpoint
 	if not os.path.exists(".sharedfiles/models"):
 		os.makedirs(".sharedfiles/models")
-	fname = ".sharedfiles/models/" + datetime.datetime.fromtimestamp(start_time).strftime('%Y-%m-%d_%H:%M_') + args.model + ".h5"
+	fname = ".sharedfiles/models/" + args.model + ".h5"
 	if args.parallel: # http://github.com/keras-team/keras/issues/8649
 		from callback import ParallelSaveCallback
 		checkpoint = ParallelSaveCallback(original_built_model,fname)
@@ -210,7 +215,7 @@ if args.save:
 
 if K._BACKEND=='tensorflow':
 	from callback import TensorBoard
-	log_dir = '.Graph/' + time.strftime("%Y-%m-%d_%H:%M:%S")
+	log_dir = '.Graph/'
 	tensorboard = TensorBoard(dataset.gt_test, dataset.classes, dataset.stride_margin, model.strides, model.offsets, model.fields, args.nms_iou,
 	    log_dir=log_dir,
 	    histogram_freq=0,
